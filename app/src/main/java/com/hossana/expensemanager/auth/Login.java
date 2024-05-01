@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,9 +23,11 @@ import com.hossana.expensemanager.utils.LoadingIndicatorManager;
 
 public class Login extends AppCompatActivity {
     EditText login_email, login_password;
+    TextView forgotPass_link, create_account_link;
     MaterialButton login_button;
     ProgressBar loading_indicator;
     boolean isDarkMode;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class Login extends AppCompatActivity {
         login_password = findViewById(R.id.login_password);
         login_button = findViewById(R.id.login_button);
         loading_indicator = findViewById(R.id.loading_indicator);
+        forgotPass_link = findViewById(R.id.forgotPass_link);
+        create_account_link = findViewById(R.id.create_account_link);
 
         if (!isDarkMode) {
             login_email.setBackgroundResource(R.drawable.textinput_bg_light);
@@ -54,11 +59,21 @@ public class Login extends AppCompatActivity {
             LoadingIndicatorManager.showLoading(loading_indicator, login_button);
             new Handler().postDelayed(() -> {
                 LoadingIndicatorManager.hideLoading(loading_indicator, login_button, "Log In");
-                Intent intent = new Intent(Login.this, Main.class);
+                intent = new Intent(Login.this, Main.class);
                 startActivity(intent);
                 login_button.setClickable(true);
                 finish();
             }, 5000);
+        });
+
+        forgotPass_link.setOnClickListener(v -> {
+            intent = new Intent(Login.this, ForgotPassword.class);
+            startActivity(intent);
+        });
+
+        create_account_link.setOnClickListener(v -> {
+            intent = new Intent(Login.this, CreateAccount.class);
+            startActivity(intent);
         });
     }
 }
