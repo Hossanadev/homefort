@@ -1,4 +1,4 @@
-package com.hossana.expensemanager.auth;
+package com.hossana.homefort.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.hossana.expensemanager.R;
+import com.hossana.homefort.R;
 
 public class Splash extends AppCompatActivity {
     Animation splashTopAnim, splashBottomAnim;

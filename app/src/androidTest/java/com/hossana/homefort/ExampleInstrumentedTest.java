@@ -1,4 +1,4 @@
-package com.hossana.expensemanager;
+package com.hossana.homefort;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.hossana.expensemanager", appContext.getPackageName());
+        assertEquals("com.hossana.homefort", appContext.getPackageName());
     }
 }

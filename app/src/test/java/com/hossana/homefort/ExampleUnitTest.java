@@ -1,4 +1,4 @@
-package com.hossana.expensemanager;
+package com.hossana.homefort;
 
 import org.junit.Test;
 

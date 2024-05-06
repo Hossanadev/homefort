@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.hossana.expensemanager'
+    namespace 'com.hossana.homefort'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.hossana.expensemanager"
+        applicationId "com.hossana.homefort"
         minSdk 24
         targetSdk 34
         versionCode 1

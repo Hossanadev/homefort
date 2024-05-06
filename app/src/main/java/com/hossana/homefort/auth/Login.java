@@ -1,4 +1,4 @@
-package com.hossana.expensemanager.auth;
+package com.hossana.homefort.auth;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -16,10 +16,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
-import com.hossana.expensemanager.Main;
-import com.hossana.expensemanager.R;
-import com.hossana.expensemanager.utils.DarkModeChecker;
-import com.hossana.expensemanager.utils.LoadingIndicatorManager;
+import com.hossana.homefort.Main;
+import com.hossana.homefort.R;
+import com.hossana.homefort.utils.DarkModeChecker;
+import com.hossana.homefort.utils.LoadingIndicatorManager;
 
 public class Login extends AppCompatActivity {
     EditText login_email, login_password;
@@ -57,11 +57,15 @@ public class Login extends AppCompatActivity {
 
         login_button.setOnClickListener(v -> {
             LoadingIndicatorManager.showLoading(loading_indicator, login_button);
+            create_account_link.setClickable(false);
+            forgotPass_link.setClickable(false);
             new Handler().postDelayed(() -> {
                 LoadingIndicatorManager.hideLoading(loading_indicator, login_button, "Log In");
                 intent = new Intent(Login.this, Main.class);
                 startActivity(intent);
                 login_button.setClickable(true);
+                create_account_link.setClickable(true);
+                forgotPass_link.setClickable(true);
                 finish();
             }, 5000);
         });

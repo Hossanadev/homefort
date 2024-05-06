@@ -1,7 +1,10 @@
-package com.hossana.expensemanager.auth;
+package com.hossana.homefort.auth;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -12,13 +15,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
-import com.hossana.expensemanager.R;
-import com.hossana.expensemanager.utils.LoadingIndicatorManager;
+import com.hossana.homefort.R;
+import com.hossana.homefort.utils.DarkModeChecker;
+import com.hossana.homefort.utils.LoadingIndicatorManager;
 
 public class ForgotPassword extends AppCompatActivity {
     TextView login_link;
     MaterialButton retrieve_password_btn;
     ProgressBar forgotPass_loading_indicator;
+    EditText email;
+    boolean isNightMode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +36,17 @@ public class ForgotPassword extends AppCompatActivity {
             return insets;
         });
 
+        isNightMode = DarkModeChecker.isDarkModeEnabled(getResources().getConfiguration());
+
         login_link = findViewById(R.id.login_link);
         retrieve_password_btn = findViewById(R.id.retrievePass_button);
         forgotPass_loading_indicator = findViewById(R.id.forgotPass_loading_indicator);
+        email = findViewById(R.id.forgotPass_email);
+
+        if (!isNightMode) {
+            email.setBackgroundResource(R.drawable.textinput_bg_light);
+            forgotPass_loading_indicator.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
+        }
 
         login_link.setOnClickListener(v -> {
             finish();

@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ExpenseManager"
+rootProject.name = "Homefort"
 include ':app'

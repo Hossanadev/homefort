@@ -1,4 +1,4 @@
-package com.hossana.expensemanager;
+package com.hossana.homefort;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.hossana.expensemanager.utils.GreetingHandler;
+import com.hossana.homefort.utils.GreetingHandler;
 
 public class Main extends AppCompatActivity {
     TextView greeting;
