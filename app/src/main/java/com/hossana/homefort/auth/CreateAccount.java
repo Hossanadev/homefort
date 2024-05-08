@@ -4,6 +4,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ public class CreateAccount extends AppCompatActivity {
     TextView login_link;
     MaterialButton createAccount_btn;
     ProgressBar createAccount_loading_indicator;
-    EditText user_name, email, password;
+    EditText user_name, email, password, confirm_password;
     boolean isDarkMode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +49,23 @@ public class CreateAccount extends AppCompatActivity {
         user_name = findViewById(R.id.createAccount_userName);
         email = findViewById(R.id.createAccount_email);
         password = findViewById(R.id.createAccount_password);
+        confirm_password = findViewById(R.id.createAccount_confirmPassword);
 
         if (!isDarkMode) {
             user_name.setBackgroundResource(R.drawable.textinput_bg_light);
             email.setBackgroundResource(R.drawable.textinput_bg_light);
             password.setBackgroundResource(R.drawable.textinput_bg_light);
+            confirm_password.setBackgroundResource(R.drawable.textinput_bg_light);
             createAccount_loading_indicator.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
         }
 
         createAccount_btn.setOnClickListener(v -> {
+            String emailValue = email.getText().toString().trim();
+            if (TextUtils.isEmpty(emailValue)) {
+                user_name.setError("Required");
+                return;
+            }
+
             LoadingIndicatorManager.showLoading(createAccount_loading_indicator, createAccount_btn);
             login_link.setClickable(false);
             new Handler().postDelayed(() -> {

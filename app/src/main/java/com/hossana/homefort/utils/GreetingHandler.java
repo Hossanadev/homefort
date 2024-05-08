@@ -7,7 +7,7 @@ public class GreetingHandler {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
-        if (hour >= 6 && hour < 12) {
+        if (hour > 0 && hour < 12) {
             return "Good Morning";
         } else if (hour >= 12 && hour < 16) {
             return "Good Afternoon";

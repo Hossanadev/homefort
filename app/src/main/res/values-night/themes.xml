@@ -1,6 +1,7 @@
 <resources>
     <style name="Base.Theme.HomeFort" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowBackground">#000000</item>
+        <item name="android:colorAccent">@color/primary</item>
         <item name="android:fontFamily">@font/redressed</item>
     </style>
 </resources>
