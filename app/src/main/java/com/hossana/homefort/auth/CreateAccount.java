@@ -4,9 +4,9 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -18,6 +18,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 import com.hossana.homefort.R;
 import com.hossana.homefort.utils.DarkModeChecker;
+import com.hossana.homefort.utils.HideKeyboard;
+import com.hossana.homefort.utils.IsValidEmail;
+import com.hossana.homefort.utils.IsValidInput;
 import com.hossana.homefort.utils.LoadingIndicatorManager;
 
 public class CreateAccount extends AppCompatActivity {
@@ -26,12 +29,13 @@ public class CreateAccount extends AppCompatActivity {
     ProgressBar createAccount_loading_indicator;
     EditText user_name, email, password, confirm_password;
     boolean isDarkMode;
+    RelativeLayout create_account_screen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.create_account);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.create_account_screen), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -40,6 +44,7 @@ public class CreateAccount extends AppCompatActivity {
         login_link = findViewById(R.id.login_link);
         createAccount_btn = findViewById(R.id.createAccount_button);
         createAccount_loading_indicator = findViewById(R.id.createAccount_loading_indicator);
+        create_account_screen = findViewById(R.id.create_account_screen);
 
         login_link.setOnClickListener(v -> {
             finish();
@@ -59,10 +64,54 @@ public class CreateAccount extends AppCompatActivity {
             createAccount_loading_indicator.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
         }
 
+        create_account_screen.setOnClickListener(v -> {
+            HideKeyboard.hideKeyboard(this);
+            user_name.clearFocus();
+            email.clearFocus();
+            password.clearFocus();
+            confirm_password.clearFocus();
+        });
+
         createAccount_btn.setOnClickListener(v -> {
-            String emailValue = email.getText().toString().trim();
-            if (TextUtils.isEmpty(emailValue)) {
-                user_name.setError("Required");
+            String userNameValue = user_name.getText().toString().trim(),
+                   emailValue = email.getText().toString().trim(),
+                   passwordValue = password.getText().toString().trim(),
+                   confirmPasswordValue = confirm_password.getText().toString().trim();
+            if (!userNameValue.isEmpty()) {
+                IsValidInput.isValid(getApplicationContext(), user_name, isDarkMode);
+            } else {
+                IsValidInput.isNotValid(getApplicationContext(), user_name, "Required", isDarkMode);
+                return;
+            }
+
+            if (!emailValue.isEmpty()) {
+                IsValidInput.isValid(getApplicationContext(), email, isDarkMode);
+            } else {
+                IsValidInput.isNotValid(getApplicationContext(), email, "Required", isDarkMode);
+                return;
+            }
+
+            if (!IsValidEmail.isValidEmail(emailValue)){
+                IsValidInput.isNotValid(getApplicationContext(), email, "Invalid Email", isDarkMode);
+                return;
+            }
+
+            if (!passwordValue.isEmpty()) {
+                IsValidInput.isValid(getApplicationContext(), password, isDarkMode);
+            } else {
+                IsValidInput.isNotValid(getApplicationContext(), password, "Required", isDarkMode);
+                return;
+            }
+
+            if (!confirmPasswordValue.isEmpty()) {
+                IsValidInput.isValid(getApplicationContext(), confirm_password, isDarkMode);
+            } else {
+                IsValidInput.isNotValid(getApplicationContext(), confirm_password,"Required", isDarkMode);
+                return;
+            }
+
+            if (!confirmPasswordValue.equals(passwordValue)) {
+                IsValidInput.isNotValid(getApplicationContext(), confirm_password,"Password Didn't Match", isDarkMode);
                 return;
             }
 

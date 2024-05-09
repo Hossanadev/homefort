@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/create_account_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".auth.CreateAccount">
@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textColor="@color/primary"
+            android:fontFamily="@font/redressed"
             android:layout_marginBottom="50dp"
             android:layout_gravity="center"
             android:textSize="25sp" />
@@ -27,15 +28,15 @@
             android:id="@+id/createAccount_userName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginVertical="5dp"
+            android:autofillHints="emailAddress"
+            android:background="@drawable/textinput_bg_dark"
             android:drawableStart="@drawable/person_icon"
             android:drawablePadding="8dp"
-            android:inputType="text"
-            android:paddingHorizontal="10dp"
             android:drawableTint="#cccccc"
-            android:layout_marginVertical="5dp"
-            android:background="@drawable/textinput_bg_dark"
             android:hint="Username"
-            android:autofillHints="emailAddress"/>
+            android:inputType="text"
+            android:paddingHorizontal="10dp" />
 
         <EditText
             android:id="@+id/createAccount_email"

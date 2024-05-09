@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +18,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 import com.hossana.homefort.R;
 import com.hossana.homefort.utils.DarkModeChecker;
+import com.hossana.homefort.utils.HideKeyboard;
+import com.hossana.homefort.utils.IsValidEmail;
+import com.hossana.homefort.utils.IsValidInput;
 import com.hossana.homefort.utils.LoadingIndicatorManager;
 
 public class ForgotPassword extends AppCompatActivity {
@@ -25,12 +29,13 @@ public class ForgotPassword extends AppCompatActivity {
     ProgressBar forgotPass_loading_indicator;
     EditText email;
     boolean isNightMode;
+    RelativeLayout forgot_password_screen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.forgot_password);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.forgot_password_screen), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -42,6 +47,7 @@ public class ForgotPassword extends AppCompatActivity {
         retrieve_password_btn = findViewById(R.id.retrievePass_button);
         forgotPass_loading_indicator = findViewById(R.id.forgotPass_loading_indicator);
         email = findViewById(R.id.forgotPass_email);
+        forgot_password_screen = findViewById(R.id.forgot_password_screen);
 
         if (!isNightMode) {
             email.setBackgroundResource(R.drawable.textinput_bg_light);
@@ -52,7 +58,26 @@ public class ForgotPassword extends AppCompatActivity {
             finish();
         });
 
+        forgot_password_screen.setOnClickListener(v -> {
+            HideKeyboard.hideKeyboard(this);
+            email.clearFocus();
+        });
+
         retrieve_password_btn.setOnClickListener(v -> {
+            String emailValue = email.getText().toString().trim();
+
+            if (!emailValue.isEmpty()) {
+                IsValidInput.isValid(getApplicationContext(), email, isNightMode);
+            } else {
+                IsValidInput.isNotValid(getApplicationContext(), email, "Required", isNightMode);
+                return;
+            }
+
+            if (!IsValidEmail.isValidEmail(emailValue)){
+                IsValidInput.isNotValid(getApplicationContext(), email, "Invalid Email", isNightMode);
+                return;
+            }
+
             LoadingIndicatorManager.showLoading(forgotPass_loading_indicator, retrieve_password_btn);
             login_link.setClickable(false);
             new Handler().postDelayed(() -> {
