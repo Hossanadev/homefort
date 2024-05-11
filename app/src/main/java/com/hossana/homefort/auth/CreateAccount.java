@@ -75,6 +75,10 @@ public class CreateAccount extends AppCompatActivity {
             email.setError(null);
             password.setError(null);
             confirm_password.setError(null);
+            IsValidInput.isValid(getApplicationContext(), user_name, isDarkMode);
+            IsValidInput.isValid(getApplicationContext(), email, isDarkMode);
+            IsValidInput.isValid(getApplicationContext(), password, isDarkMode);
+            IsValidInput.isValid(getApplicationContext(), confirm_password, isDarkMode);
         });
 
         createAccount_btn.setOnClickListener(v -> {

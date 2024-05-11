@@ -63,6 +63,7 @@ public class ForgotPassword extends AppCompatActivity {
             HideKeyboard.hideKeyboard(this);
             email.clearFocus();
             email.setError(null);
+            IsValidInput.isValid(getApplicationContext(), email, isNightMode);
         });
 
         retrieve_password_btn.setOnClickListener(v -> {

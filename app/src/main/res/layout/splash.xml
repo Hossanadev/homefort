@@ -27,7 +27,7 @@
         android:layout_alignParentBottom="true"
         android:textColor="@color/white"
         android:fontFamily="@font/redressed"
-        android:text="Home Listing and Properties"
+        android:text="House Renting and Properties"
         android:layout_marginBottom="50sp"
         android:textSize="16dp"
         />

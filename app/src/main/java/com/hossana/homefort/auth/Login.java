@@ -69,6 +69,8 @@ public class Login extends AppCompatActivity {
             login_password.clearFocus();
             login_email.setError(null);
             login_password.setError(null);
+            IsValidInput.isValid(getApplicationContext(), login_email, isDarkMode);
+            IsValidInput.isValid(getApplicationContext(), login_password, isDarkMode);
         });
 
         login_button.setOnClickListener(v -> {
