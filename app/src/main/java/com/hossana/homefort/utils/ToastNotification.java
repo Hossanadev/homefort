@@ -23,7 +23,7 @@ public class ToastNotification {
 
         TextView text = layout.findViewById(successToast ? R.id.timex_toast_text : R.id.error_timex_toast_text);
         text.setText(message);
-        Typeface font = ResourcesCompat.getFont(context, R.font.redressed);
+        Typeface font = ResourcesCompat.getFont(context, R.font.lato);
         text.setTypeface(font);
 
         Toast toast = new Toast(context);

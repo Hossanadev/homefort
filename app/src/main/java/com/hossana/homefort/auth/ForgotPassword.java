@@ -22,6 +22,7 @@ import com.hossana.homefort.utils.HideKeyboard;
 import com.hossana.homefort.utils.IsValidEmail;
 import com.hossana.homefort.utils.IsValidInput;
 import com.hossana.homefort.utils.LoadingIndicatorManager;
+import com.hossana.homefort.utils.ToastNotification;
 
 public class ForgotPassword extends AppCompatActivity {
     TextView login_link;
@@ -84,6 +85,7 @@ public class ForgotPassword extends AppCompatActivity {
             LoadingIndicatorManager.showLoading(forgotPass_loading_indicator, retrieve_password_btn);
             login_link.setClickable(false);
             new Handler().postDelayed(() -> {
+                ToastNotification.toastNotification(this, "Password sent to your email", "success");
                 LoadingIndicatorManager.hideLoading(forgotPass_loading_indicator, retrieve_password_btn, "Retrieve Password");
                 finish();
                 retrieve_password_btn.setClickable(true);

@@ -22,6 +22,7 @@ import com.hossana.homefort.utils.HideKeyboard;
 import com.hossana.homefort.utils.IsValidEmail;
 import com.hossana.homefort.utils.IsValidInput;
 import com.hossana.homefort.utils.LoadingIndicatorManager;
+import com.hossana.homefort.utils.ToastNotification;
 
 public class CreateAccount extends AppCompatActivity {
     TextView login_link;
@@ -127,6 +128,7 @@ public class CreateAccount extends AppCompatActivity {
             LoadingIndicatorManager.showLoading(createAccount_loading_indicator, createAccount_btn);
             login_link.setClickable(false);
             new Handler().postDelayed(() -> {
+                ToastNotification.toastNotification(this, "Account created successfully", "success");
                 LoadingIndicatorManager.hideLoading(createAccount_loading_indicator, createAccount_btn, "Create Account");
                 finish();
                 createAccount_btn.setClickable(true);
