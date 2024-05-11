@@ -59,6 +59,8 @@ public class Login extends AppCompatActivity {
             login_email.setBackgroundResource(R.drawable.textinput_bg_light);
             login_password.setBackgroundResource(R.drawable.textinput_bg_light);
             loading_indicator.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
+            create_account_link.setBackgroundResource(R.drawable.textinput_bg_light);
+            forgotPass_link.setBackgroundResource(R.drawable.textinput_bg_light);
         }
 
         login_screen.setOnClickListener(v -> {

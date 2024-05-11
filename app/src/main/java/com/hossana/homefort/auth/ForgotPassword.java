@@ -52,6 +52,7 @@ public class ForgotPassword extends AppCompatActivity {
         if (!isNightMode) {
             email.setBackgroundResource(R.drawable.textinput_bg_light);
             forgotPass_loading_indicator.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
+            login_link.setBackgroundResource(R.drawable.textinput_bg_light);
         }
 
         login_link.setOnClickListener(v -> {

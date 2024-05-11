@@ -62,6 +62,7 @@ public class CreateAccount extends AppCompatActivity {
             password.setBackgroundResource(R.drawable.textinput_bg_light);
             confirm_password.setBackgroundResource(R.drawable.textinput_bg_light);
             createAccount_loading_indicator.setProgressTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
+            login_link.setBackgroundResource(R.drawable.textinput_bg_light);
         }
 
         create_account_screen.setOnClickListener(v -> {
