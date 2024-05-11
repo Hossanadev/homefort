@@ -65,6 +65,8 @@ public class Login extends AppCompatActivity {
             HideKeyboard.hideKeyboard(this);
             login_email.clearFocus();
             login_password.clearFocus();
+            login_email.setError(null);
+            login_password.setError(null);
         });
 
         login_button.setOnClickListener(v -> {

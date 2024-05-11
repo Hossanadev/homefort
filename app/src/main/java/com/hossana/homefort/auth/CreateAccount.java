@@ -70,6 +70,10 @@ public class CreateAccount extends AppCompatActivity {
             email.clearFocus();
             password.clearFocus();
             confirm_password.clearFocus();
+            user_name.setError(null);
+            email.setError(null);
+            password.setError(null);
+            confirm_password.setError(null);
         });
 
         createAccount_btn.setOnClickListener(v -> {

@@ -61,6 +61,7 @@ public class ForgotPassword extends AppCompatActivity {
         forgot_password_screen.setOnClickListener(v -> {
             HideKeyboard.hideKeyboard(this);
             email.clearFocus();
+            email.setError(null);
         });
 
         retrieve_password_btn.setOnClickListener(v -> {
