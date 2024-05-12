@@ -27,9 +27,9 @@
         android:layout_alignParentBottom="true"
         android:textColor="@color/white"
         android:fontFamily="@font/redressed"
-        android:text="House Renting and Properties"
+        android:text="House Renting Solution"
         android:layout_marginBottom="50sp"
-        android:textSize="16dp"
+        android:textSize="12dp"
         />
 
 </RelativeLayout>

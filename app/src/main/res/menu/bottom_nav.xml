@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_houses"
+        android:icon="@drawable/house"
+        android:title="Houses" />
+    <item
+        android:id="@+id/navigation_properties"
+        android:icon="@drawable/properties"
+        android:title="Properties" />
+    <item
+        android:id="@+id/navigation_bookmark"
+        android:icon="@drawable/bookmark"
+        android:title="Bookmark" />
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/settings"
+        android:title="Settings" />
+</menu>
