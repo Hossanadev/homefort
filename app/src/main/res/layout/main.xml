@@ -23,7 +23,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="24dp">
+            android:layout_marginHorizontal="16dp">
             <LinearLayout
                 android:id="@+id/greeting_user"
                 android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="Hi, User"
+                    android:text="Hi, Hossana"
                     android:textSize="25sp"/>
                 <TextView
                     android:id="@+id/greeting"
@@ -46,7 +46,6 @@
                     android:text=""
                     android:textSize="16sp"/>
             </LinearLayout>
-
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -58,10 +57,14 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
+        app:itemActiveIndicatorStyle="@color/primary"
         app:menu="@menu/bottom_nav"
-        app:itemTextColor="@drawable/bottom_nav_bg"
-        app:itemIconTint="@drawable/bottom_nav_bg"
+        app:itemBackground="@null"
+        app:itemRippleColor="@null"
+        android:background="@drawable/bottom_nav_bg"
+        app:itemTextColor="@drawable/bottom_nav_icon_bg"
+        app:itemIconTint="@drawable/bottom_nav_icon_bg"
         app:labelVisibilityMode="labeled"
         android:layout_alignParentBottom="true"/>
 
