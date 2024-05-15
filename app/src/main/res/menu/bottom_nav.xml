@@ -9,9 +9,9 @@
         android:icon="@drawable/properties"
         android:title="Properties" />
     <item
-        android:id="@+id/navigation_bookmark"
+        android:id="@+id/navigation_bookmarks"
         android:icon="@drawable/bookmark"
-        android:title="Bookmark" />
+        android:title="Bookmarks" />
     <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/settings"

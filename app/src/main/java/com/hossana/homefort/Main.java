@@ -11,6 +11,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.hossana.homefort.fragments.BookmarksFragment;
+import com.hossana.homefort.fragments.HousesFragment;
+import com.hossana.homefort.fragments.PropertiesFragment;
+import com.hossana.homefort.fragments.SettingsFragment;
 import com.hossana.homefort.utils.DarkModeChecker;
 import com.hossana.homefort.utils.GreetingHandler;
 
@@ -32,11 +36,31 @@ public class Main extends AppCompatActivity {
 
         greeting = findViewById(R.id.greeting);
         bottom_navigation_view = findViewById(R.id.bottom_navigation_view);
+        bottom_navigation_view.setSelectedItemId(R.id.navigation_houses);
 
         greeting.setText(GreetingHandler.getGreeting());
 
         if (!DarkModeChecker.isDarkModeEnabled(getResources().getConfiguration())) {
             bottom_navigation_view.setBackgroundResource(R.drawable.bottom_nav_bg_light);
         }
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frameLayout, new HousesFragment()).commit();
+
+        bottom_navigation_view.setOnItemSelectedListener(item -> {
+            if (item.getItemId() ==  R.id.navigation_houses) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_frameLayout, new HousesFragment()).commit();
+                return true;
+            } else if (item.getItemId() ==  R.id.navigation_properties) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_frameLayout, new PropertiesFragment()).commit();
+                return true;
+            } else if (item.getItemId() ==  R.id.navigation_bookmarks) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_frameLayout, new BookmarksFragment()).commit();
+                return true;
+            } else if (item.getItemId() ==  R.id.navigation_settings) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_frameLayout, new SettingsFragment()).commit();
+                return true;
+            }
+            return false;
+        });
     }
 }

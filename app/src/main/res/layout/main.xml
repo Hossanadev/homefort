@@ -55,10 +55,17 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
+    <FrameLayout
+        android:id="@+id/main_frameLayout"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_activity"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="75dp"
         app:itemActiveIndicatorStyle="@color/primary"
         app:menu="@menu/bottom_nav"
         app:itemBackground="@null"
