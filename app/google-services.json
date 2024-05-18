@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "227948176129",
+    "project_id": "homefort-app",
+    "storage_bucket": "homefort-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227948176129:android:7225118e5af7947d1fb100",
+        "android_client_info": {
+          "package_name": "com.hossana.homefort"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIVNrV_F0aiNlpthbz_ywFtQ4z7j_pjm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,19 +3,24 @@ package com.hossana.homefort.auth;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hossana.homefort.R;
 import com.hossana.homefort.utils.DarkModeChecker;
 import com.hossana.homefort.utils.HideKeyboard;
@@ -29,8 +34,11 @@ public class CreateAccount extends AppCompatActivity {
     MaterialButton createAccount_btn;
     ProgressBar createAccount_loading_indicator;
     EditText user_name, email, password, confirm_password;
+    static String userNameValue, emailValue, passwordValue, confirmPasswordValue;
     boolean isDarkMode;
     RelativeLayout create_account_screen;
+    private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://homefort-app-default-rtdb.firebaseio.com/");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +55,7 @@ public class CreateAccount extends AppCompatActivity {
         createAccount_loading_indicator = findViewById(R.id.createAccount_loading_indicator);
         create_account_screen = findViewById(R.id.create_account_screen);
 
-        login_link.setOnClickListener(v -> {
-            finish();
-        });
+        login_link.setOnClickListener(v -> finish());
 
         isDarkMode = DarkModeChecker.isDarkModeEnabled(getResources().getConfiguration());
         user_name = findViewById(R.id.createAccount_userName);
@@ -83,10 +89,12 @@ public class CreateAccount extends AppCompatActivity {
         });
 
         createAccount_btn.setOnClickListener(v -> {
-            String userNameValue = user_name.getText().toString().trim(),
-                   emailValue = email.getText().toString().trim(),
-                   passwordValue = password.getText().toString().trim(),
-                   confirmPasswordValue = confirm_password.getText().toString().trim();
+
+           userNameValue = user_name.getText().toString().trim();
+           emailValue = email.getText().toString().trim();
+           passwordValue = password.getText().toString().trim();
+           confirmPasswordValue = confirm_password.getText().toString().trim();
+
             if (!userNameValue.isEmpty()) {
                 IsValidInput.isValid(getApplicationContext(), user_name, isDarkMode);
             } else {
@@ -125,15 +133,37 @@ public class CreateAccount extends AppCompatActivity {
                 return;
             }
 
-            LoadingIndicatorManager.showLoading(createAccount_loading_indicator, createAccount_btn);
-            login_link.setClickable(false);
-            new Handler().postDelayed(() -> {
-                ToastNotification.toastNotification(this, "Account created successfully", "success");
-                LoadingIndicatorManager.hideLoading(createAccount_loading_indicator, createAccount_btn, "Create Account");
-                finish();
+           createAccount(databaseReference, userNameValue, emailValue, passwordValue);
+
+        });
+    }
+
+    public void createAccount(DatabaseReference databaseReference, String userNameValue, String emailValue, String passwordValue) {
+        LoadingIndicatorManager.showLoading(createAccount_loading_indicator, createAccount_btn);
+        login_link.setClickable(false);
+        databaseReference.child("users").orderByChild("email").equalTo(emailValue).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    ToastNotification.toastNotification(getApplicationContext(), "Account with provided email address already exists", "error");
+                    LoadingIndicatorManager.hideLoading(createAccount_loading_indicator, createAccount_btn, "Create Account");
+                } else {
+                    DatabaseReference userRef = databaseReference.child("users").push();
+                    userRef.child("username").setValue(userNameValue);
+                    userRef.child("email").setValue(emailValue);
+                    userRef.child("password").setValue(passwordValue);
+
+                    ToastNotification.toastNotification(getApplicationContext(), "Account created successfully", "success");
+                    LoadingIndicatorManager.hideLoading(createAccount_loading_indicator, createAccount_btn, "Create Account");
+                    finish();
+                }
                 createAccount_btn.setClickable(true);
                 login_link.setClickable(true);
-            }, 5000);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                ToastNotification.toastNotification(getApplicationContext(), "Error occurred while creating account", "error");
+            }
         });
     }
 }
